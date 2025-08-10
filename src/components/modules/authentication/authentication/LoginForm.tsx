@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -16,12 +17,13 @@ import { toast } from "sonner";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import Password from "@/components/ui/Password";
 import { Input } from "@/components/ui/input";
+import config from "@/config/env";
 
 export function LoginForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [login] = useLoginMutation();
   const form = useForm({
     defaultValues: {
@@ -38,12 +40,16 @@ export function LoginForm({
     try {
       const result = await login(userInfo).unwrap();
       console.log(result);
-      toast.success("Successfully Logged In");
-    } catch (err) {
+      toast.success(" Logged In Successfully");
+      navigate("/")
+    } catch (err: any) {
       console.error(err);
-      if (err.status === 400) {
-        toast.error("You are not verified")
-        navigate("/verify",{state:data.email})
+      if (err.data.message === "User is not Verified") {
+        toast.error("You are not verified");
+        navigate("/verify", { state: data.email });
+      }
+      if (err.data.message === "Password doesn't match") {
+        toast.error("Wrong credentials")
       }
     }
   };
@@ -102,7 +108,7 @@ export function LoginForm({
             Or continue with
           </span>
         </div>
-        <Button variant="outline" className="w-full">
+        <Button onClick={()=>window.open(`${config.baseUrl}/auth/google`)} variant="outline" className="w-full">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
               d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
