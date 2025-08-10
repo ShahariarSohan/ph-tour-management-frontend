@@ -7,7 +7,7 @@ interface IProps {
   children: ReactNode;
 }
 
-const CommonLayout = ({ children }: IProps) => {
+export default function CommonLayout({ children }: IProps)  {
   return (
     <div className="min-h-screen flex flex-col ">
       <Navbar />
@@ -17,4 +17,3 @@ const CommonLayout = ({ children }: IProps) => {
   );
 };
 
-export default CommonLayout;
