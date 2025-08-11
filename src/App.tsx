@@ -1,7 +1,9 @@
 import { Outlet } from "react-router";
 import CommonLayout from "./components/layout/CommonLayout";
 
-const App = () => {
+
+export default function App() {
+  
   return (
     <>
       <CommonLayout>
@@ -11,4 +13,4 @@ const App = () => {
   );
 };
 
-export default App;
+
