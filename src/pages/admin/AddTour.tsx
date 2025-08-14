@@ -1,7 +1,9 @@
+import AddTourCard from "@/components/modules/admin/tour/AddTourCard";
+
 export default function AddTour() {
   return (
     <div>
-      <h1>This is a AddTour</h1>
+     <AddTourCard></AddTourCard>
     </div>
   );
 }
