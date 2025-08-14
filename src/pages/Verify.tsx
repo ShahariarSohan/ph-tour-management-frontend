@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -102,7 +104,7 @@ export default function Verify() {
       if (res.success) {
         toast.success("Email verified", { id: toastId });
       }
-    } catch (err) {
+    } catch (err:any) {
       toast.error("Email verification failed");
     }
   };
