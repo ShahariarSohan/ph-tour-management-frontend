@@ -19,6 +19,8 @@ import {
 import { Input } from "@/components/ui/input";
 import SingleImageUploader from "@/components/ui/SingleImageUploader";
 import { Textarea } from "@/components/ui/textarea";
+import type { FileMetadata } from "@/hooks/use-file-upload";
+
 import { useAddDivisionMutation } from "@/redux/features/division/division.api";
 import { useState } from "react";
 
@@ -27,7 +29,7 @@ import { toast } from "sonner";
 
 export function AddDivisionModal() {
   const [open,setOpen]=useState(false)
-  const [image, setImage] = useState<File | null>(null)
+  const [image, setImage] = useState<(File | FileMetadata) | null>(null);
   const [addDivision] = useAddDivisionMutation();
 
   const form = useForm({
