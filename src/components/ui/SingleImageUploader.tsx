@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AlertCircleIcon, ImageUpIcon, XIcon } from "lucide-react"
 
-import { useFileUpload } from "@/hooks/use-file-upload"
-import { useEffect } from "react"
+import { useFileUpload, type FileMetadata } from "@/hooks/use-file-upload"
+import { useEffect, type Dispatch } from "react"
 
-export default function SingleImageUploader({onUpload}:any) {
-  
-  
-  const maxSizeMB = 5
-  const maxSize = maxSizeMB * 1024 * 1024 // 5MB default
+export default function SingleImageUploader({
+  onUpload,
+}: {
+  onUpload: Dispatch<React.SetStateAction<File|FileMetadata | null>>;
+}) {
+  const maxSizeMB = 5;
+  const maxSize = maxSizeMB * 1024 * 1024; // 5MB default
 
   const [
     { files, isDragging, errors },
@@ -24,17 +26,16 @@ export default function SingleImageUploader({onUpload}:any) {
   ] = useFileUpload({
     accept: "image/*",
     maxSize,
-  })
-  
+  });
+
   useEffect(() => {
     if (files.length > 0) {
-      onUpload(files[0].file)
+      onUpload(files[0].file);
+    } else {
+      onUpload(null);
     }
-    else {
-      onUpload(null)
-    }
-  },[files])
-  const previewUrl = files[0]?.preview || null
+  }, [files]);
+  const previewUrl = files[0]?.preview || null;
 
   return (
     <div className="flex flex-col gap-2">
@@ -104,5 +105,5 @@ export default function SingleImageUploader({onUpload}:any) {
         </div>
       )}
     </div>
-  )
+  );
 }
