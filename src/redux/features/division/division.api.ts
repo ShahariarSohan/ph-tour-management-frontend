@@ -11,19 +11,13 @@ export const divisionApi = baseApi.injectEndpoints({
       invalidatesTags: ["DIVISION"],
     }),
     getDivision: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: "/division",
         method: "GET",
+        params
       }),
       providesTags: ["DIVISION"],
     }),
-    // removeTourType: builder.mutation({
-    //   query: (tourId) => ({
-    //     url: `/tour/tour-types/${tourId}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["TourType"],
-    // }),
   }),
 });
 export const { useAddDivisionMutation, useGetDivisionQuery } = divisionApi;

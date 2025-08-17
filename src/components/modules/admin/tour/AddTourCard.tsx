@@ -86,7 +86,7 @@ export default function AddTourCard() {
       included: data.included.map((item: { value: string }) => item.value),
       excluded: data.excluded.map((item: { value: string }) => item.value),
     };
-    console.log(tourData);
+    
     const formData = new FormData();
     formData.append("data", JSON.stringify(tourData));
     images.forEach((image) => formData.append("files", image as File));
