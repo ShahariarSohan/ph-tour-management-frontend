@@ -41,7 +41,7 @@ export default function MultipleImageUploader({
     } else {
       onUpload([]);
     }
-  }, [files]);
+  }, [files,onUpload]);
   return (
     <div className="flex flex-col gap-2">
       {/* Drop area */}
