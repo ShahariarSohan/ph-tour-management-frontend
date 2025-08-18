@@ -45,11 +45,11 @@ export default function Verify() {
   const [sendOtp] = useSendOtpMutation();
   const [verifyOtp] = useVerifyOtpMutation();
   const [timer, setTimer] = useState(5);
-  //   useEffect(() => {
-  //     if (!email) {
-  //       navigate("/");
-  //     }
-  // },[email])
+    useEffect(() => {
+      if (!email) {
+        navigate("/");
+      }
+  },[email])
 
   useEffect(() => {
     if (!email || !confirm) {
